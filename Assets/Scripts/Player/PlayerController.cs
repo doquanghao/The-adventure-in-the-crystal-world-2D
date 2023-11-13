@@ -14,9 +14,8 @@ public class PlayerController : MonoBehaviour
     public float dashCoolDown;
     public int damage = 20;
     public int bulletCount = 100;
-
-
     public int amountOfJumps = 1;
+    public int diamondCount;
     public LayerMask whatIsGround;
     public Transform groundCheck;
     public Transform positionShooting;
@@ -25,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public ContactFilter2D enemyContactFilter;
 
     public TMP_Text textBulletCount;
+    public TMP_Text textDiamondCount;
 
     private Rigidbody2D rb;
     private Vector2 move;
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         _animatorController = GetComponent<Animator>();
         amountOfJumpsLeft = amountOfJumps;
         textBulletCount.text = bulletCount.ToString();
+        textDiamondCount.text = "";
     }
 
     private void Update()
@@ -158,7 +159,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (c.gameObject.GetComponent<BossBringerOfDeath>() != null)
                 {
-                    c.gameObject.GetComponent<BossBringerOfDeath>().UpdateHpEnemy(damage, gameObject);
+                    c.gameObject.GetComponent<BossBringerOfDeath>().UpdateHpEnemy(damage);
                 }
             }
         }
@@ -243,6 +244,18 @@ public class PlayerController : MonoBehaviour
             Flip();
             facingDirection = -1;
         }
+    }
+
+    public void UpdateTextDiamondCount(int count)
+    {
+        diamondCount += count;
+        textDiamondCount.text = diamondCount.ToString();
+    }
+
+    public void UpdateTextShooting(int count)
+    {
+        bulletCount += count;
+        textBulletCount.text = bulletCount.ToString();
     }
 
     private void Flip()

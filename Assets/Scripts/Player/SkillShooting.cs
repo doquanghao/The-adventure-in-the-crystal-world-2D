@@ -48,6 +48,10 @@ public class SkillShooting : MonoBehaviour
                 transform.position = collision.gameObject.transform.position;
                 collision.gameObject.GetComponent<Enemy_behaviour_idle>().UpdateHpEnemy(damage);
             }
+            else if (collision.gameObject.GetComponent<BossBringerOfDeath>() != null)
+            {
+                collision.gameObject.GetComponent<BossBringerOfDeath>().UpdateHpEnemy(damage);
+            }
         }
     }
     public void SetDirection(float _direction)

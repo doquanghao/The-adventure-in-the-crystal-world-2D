@@ -10,9 +10,12 @@ public class PlayerHealth : MonoBehaviour
     public Transform groundHp;
     public Sprite imageHpFull;
     public Sprite imageHpEmpty;
-
+    public GameObject uiDie;
+    private Animator _animatorController;
     private void Awake()
     {
+         uiDie.SetActive(false);
+        _animatorController = GetComponent<Animator>();
         currentHealth = countHeal;
     }
 
@@ -28,15 +31,24 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            _animatorController.SetTrigger("hurt");
             groundHp.GetChild(currentHealth).GetComponent<Image>().sprite = imageHpEmpty;
         }
     }
+
+    public void UpdateHealth(int count)
+    {
+        if (currentHealth <= countHeal)
+        {
+            currentHealth += count;
+            groundHp.GetChild(currentHealth).GetComponent<Image>().sprite = imageHpEmpty;
+        }
+    }
+
     // Hàm xử lý khi nhân vật chết
     private void Die()
     {
-        // Xử lý khi nhân vật chết, ví dụ như kết thúc trò chơi, chơi animation chết, v.v.
-        Debug.Log("Nhân vật đã chết!");
-        // Đặt HP về lại giá trị ban đầu sau khi chết (nếu cần)
+        uiDie.SetActive(true);
     }
 
 }

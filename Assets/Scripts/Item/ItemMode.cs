@@ -10,7 +10,6 @@ public enum TypeItem
 }
 public class ItemMode : MonoBehaviour
 {
-    public int quantity;
     public TypeItem typeItem;
     public Animator animatorItem;
     public void InitItem()
@@ -21,6 +20,21 @@ public class ItemMode : MonoBehaviour
     {
         if (trig.gameObject.CompareTag("Player"))
         {
+            switch (typeItem)
+            {
+                case TypeItem.dagger:
+                    trig.GetComponent<PlayerController>().UpdateTextShooting(1);
+                    break;
+                case TypeItem.diamond_big:
+                    trig.GetComponent<PlayerController>().UpdateTextDiamondCount(2000);
+                    break;
+                case TypeItem.diamond_small:
+                    trig.GetComponent<PlayerController>().UpdateTextDiamondCount(200);
+                    break;
+                case TypeItem.heart:
+                    trig.GetComponent<PlayerHealth>().UpdateHealth(1);
+                    break;
+            }
             Destroy(gameObject);
         }
     }
