@@ -11,7 +11,11 @@ public class PlayerHealth : MonoBehaviour
     public Sprite imageHpFull;
     public Sprite imageHpEmpty;
 
-  
+    private void Awake()
+    {
+        currentHealth = countHeal;
+    }
+
     // Hàm trừ HP
     public void TakeDamage(int damageAmount)
     {

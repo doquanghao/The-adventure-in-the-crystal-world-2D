@@ -33,7 +33,6 @@ public class Enemy_behaviour : MonoBehaviour
     private Animator anim;
     private float distance; //Store the distance b/w enemy and player
     private bool attackMode;
-    private bool inRange; //Check if Player is in range
     private bool cooling; //Check if Enemy is cooling after attack
     private bool canMove = true; //Check if Enemy is cooling after attack
     private float intTimer;
@@ -56,16 +55,13 @@ public class Enemy_behaviour : MonoBehaviour
             Move();
         }
 
-        if (!InsideOfLimits() && !inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
+        if (!InsideOfLimits() && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
         {
             SelectTarget();
         }
 
-        if (inRange)
-        {
-            hit = Physics2D.Raycast(rayCast.position, transform.right, rayCastLength, raycastMask);
-            RaycastDebugger();
-        }
+        hit = Physics2D.Raycast(rayCast.position, transform.right, rayCastLength, raycastMask);
+        RaycastDebugger();
 
         //When Player is detected
         if (hit.collider != null)
@@ -74,13 +70,9 @@ public class Enemy_behaviour : MonoBehaviour
         }
         else if (hit.collider == null)
         {
-            inRange = false;
-        }
-
-        if (inRange == false)
-        {
             StopAttack();
         }
+
     }
 
     public void UpdateHpEnemy(int damage, GameObject player)
@@ -124,7 +116,6 @@ public class Enemy_behaviour : MonoBehaviour
         if (trig.gameObject.CompareTag("Player"))
         {
             target = trig.transform;
-            inRange = true;
             Flip();
         }
     }
@@ -175,18 +166,10 @@ public class Enemy_behaviour : MonoBehaviour
 
             if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
             {
-                if (inRange)
-                {
-                    canMove = false;
-                    anim.SetBool("canWalk", canMove);
-                    StartCoroutine(OnRun());
-                }
-                else
-                {
-                    canMove = false;
-                    anim.SetBool("canWalk", canMove);
-                    StartCoroutine(OnRun());
-                }
+
+                canMove = false;
+                anim.SetBool("canWalk", canMove);
+                StartCoroutine(OnRun());
             }
         }
     }
@@ -282,7 +265,6 @@ public class Enemy_behaviour : MonoBehaviour
         {
             if (c.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log($"sss");
                 c.gameObject.GetComponent<PlayerHealth>().TakeDamage(1);
             }
         }
