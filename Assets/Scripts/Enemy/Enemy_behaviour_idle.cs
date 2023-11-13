@@ -29,7 +29,7 @@ public class Enemy_behaviour_idle : MonoBehaviour
         intTimer = timer; //Store the inital value of timer
         anim = GetComponent<Animator>();
         hpEnemyLeft = hpEnemy;
-        hp.transform.localScale = new Vector3((float)hpEnemyLeft / 100, 1, 1);
+        hp.transform.localScale = new Vector3((float)hpEnemyLeft / hpEnemy, 1, 1);
     }
 
     private void Update()
@@ -54,7 +54,7 @@ public class Enemy_behaviour_idle : MonoBehaviour
         else
         {
             anim.SetTrigger("damage");
-            hp.transform.localScale = new Vector3((float)hpEnemyLeft / 100, 1, 1);
+            hp.transform.localScale = new Vector3((float)hpEnemyLeft / hpEnemy, 1, 1);
         }
     }
 

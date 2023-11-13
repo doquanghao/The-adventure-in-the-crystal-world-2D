@@ -45,7 +45,7 @@ public class Enemy_behaviour : MonoBehaviour
         intTimer = timer; //Store the inital value of timer
         anim = GetComponent<Animator>();
         hpEnemyLeft = hpEnemy;
-        hp.transform.localScale = new Vector3((float)hpEnemyLeft / 100, 1, 1);
+        hp.transform.localScale = new Vector3((float)hpEnemyLeft / hpEnemy, 1, 1);
     }
 
     void Update()
@@ -95,7 +95,7 @@ public class Enemy_behaviour : MonoBehaviour
             Vector2 vector = transform.position - player.transform.position;
             StartCoroutine(DelayHurt(vector));
             anim.SetTrigger("damage");
-            hp.transform.localScale = new Vector3((float)hpEnemyLeft / 100, 1, 1);
+            hp.transform.localScale = new Vector3((float)hpEnemyLeft / hpEnemy, 1, 1);
         }
     }
     IEnumerator DelayHurt(Vector2 vector)

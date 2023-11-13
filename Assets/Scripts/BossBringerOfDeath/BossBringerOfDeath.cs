@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class BossBringerOfDeath : MonoBehaviour
 {
@@ -12,7 +12,8 @@ public class BossBringerOfDeath : MonoBehaviour
     public Vector2 positionOffSetSkill;
     public float timer; //Timer for cooldown between attacks
     public int hpEnemy = 100;
-    public GameObject hp;
+    public Slider hp;
+    public GameObject bossUI;
     public GameObject boxAttack;
     public GameObject attackRange;
     public GameObject player;
@@ -22,7 +23,6 @@ public class BossBringerOfDeath : MonoBehaviour
     #region Private Variables
     private Transform target;
     private Animator anim;
-    private float distance; //Store the distance b/w enemy and player
     private bool attackMode;
     private bool cooling; //Check if Enemy is cooling after attack
     private bool canMove = true; //Check if Enemy is cooling after attack
@@ -38,7 +38,7 @@ public class BossBringerOfDeath : MonoBehaviour
         anim = GetComponent<Animator>();
         hpEnemyLeft = hpEnemy;
         countAttack = 0;
-        //        hp.transform.localScale = new Vector3((float)hpEnemyLeft / 100, 1, 1);
+        hp.value = (float)hpEnemyLeft / hpEnemy;
     }
 
     void Update()
@@ -57,7 +57,6 @@ public class BossBringerOfDeath : MonoBehaviour
             {
                 StopAttack();
             }
-
             Flip();
         }
     }
@@ -74,39 +73,23 @@ public class BossBringerOfDeath : MonoBehaviour
         }
         return false;
     }
-    public void UpdateHpEnemy(int damage, GameObject player)
+    public void UpdateHpEnemy(int damage)
     {
         hpEnemyLeft -= damage;
         if (hpEnemyLeft <= 0)
         {
             var itemClone = Instantiate(item);
-            itemClone.transform.position = transform.position;
+            itemClone.transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
             var itemMode = itemClone.GetComponent<ItemMode>();
-            System.Random random = new System.Random();
-            TypeItem randomTypeItem = (TypeItem)random.Next(1, Enum.GetValues(typeof(TypeItem)).Length + 1);
-            itemMode.typeItem = randomTypeItem;
             itemMode.InitItem();
-            Destroy(transform.parent.gameObject);
+            Destroy(bossUI);
+            Destroy(transform.gameObject);
         }
         else
         {
-            Vector2 vector = transform.position - player.transform.position;
-            StartCoroutine(DelayHurt(vector));
             anim.SetTrigger("damage");
-            hp.transform.localScale = new Vector3((float)hpEnemyLeft / 100, 1, 1);
+            hp.value = (float)hpEnemyLeft / hpEnemy;
         }
-    }
-    IEnumerator DelayHurt(Vector2 vector)
-    {
-        if (vector.x > 0)
-        {
-            transform.position = new Vector2(transform.position.x + 3, transform.position.y);
-        }
-        else
-        {
-            transform.position = new Vector2(transform.position.x + -3, transform.position.y);
-        }
-        yield return new WaitForSeconds(0.3f);
     }
 
     void OnTriggerEnter2D(Collider2D trig)
