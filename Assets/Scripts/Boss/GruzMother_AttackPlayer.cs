@@ -8,7 +8,7 @@ public class GruzMother_AttackPlayer : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        gruzMother = GameObject.FindGameObjectWithTag("GruzMother").GetComponent<Boss>();
+        gruzMother = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

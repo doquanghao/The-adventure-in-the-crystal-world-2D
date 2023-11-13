@@ -9,9 +9,7 @@ public class Boss_Idel : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
-       if (boss == null){
-        Debug.LogError("Không tìm thấy Boss!");
-       }
+      
        
     }
 
