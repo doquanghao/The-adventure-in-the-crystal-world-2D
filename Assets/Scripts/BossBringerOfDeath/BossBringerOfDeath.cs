@@ -8,7 +8,6 @@ public class BossBringerOfDeath : MonoBehaviour
 {
     #region Public Variables
     public GameObject item;
-    public Transform rayCast;
     public float moveSpeed;
     public Vector2 positionOffSetSkill;
     public float timer; //Timer for cooldown between attacks
@@ -91,7 +90,6 @@ public class BossBringerOfDeath : MonoBehaviour
         }
         else
         {
-
             Vector2 vector = transform.position - player.transform.position;
             StartCoroutine(DelayHurt(vector));
             anim.SetTrigger("damage");
