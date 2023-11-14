@@ -8,6 +8,9 @@ TagManager:
   - Item
   - Boss
   - GruzMother
+  - Ground
+  - Background
+  - Deco
   layers:
   - Default
   - TransparentFX
@@ -47,4 +50,16 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 95382847
+    locked: 0
+  - name: Enemy
+    uniqueID: 4080059801
+    locked: 0
+  - name: Platform
+    uniqueID: 857484655
+    locked: 0
+  - name: Deco
+    uniqueID: 2652323499
+    locked: 0
+  - name: Background
+    uniqueID: 2988593927
     locked: 0
