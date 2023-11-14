@@ -11,6 +11,9 @@ public class Enemy_behaviour_idle : MonoBehaviour
     public int hpEnemy = 100;
     public GameObject hp;
     public GameObject item;
+
+    public GameObject boxAttack;
+    public ContactFilter2D enemyContactFilter;
     #endregion
 
     #region Private Variables
@@ -129,6 +132,18 @@ public class Enemy_behaviour_idle : MonoBehaviour
         else
         {
             isAttackRight = false;
+        }
+    }
+    public void DamagePlayer()
+    {
+        List<Collider2D> colliders = new List<Collider2D>();
+        Physics2D.OverlapCollider(boxAttack.GetComponent<Collider2D>(), enemyContactFilter, colliders);
+        foreach (Collider2D c in colliders)
+        {
+            if (c.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                c.gameObject.GetComponent<PlayerHealth>().TakeDamage(1);
+            }
         }
     }
 }

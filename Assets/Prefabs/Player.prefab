@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4540318700362526083}
   m_Layer: 0
   m_Name: BoxAttack (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 6729132737333781581}
   m_Layer: 0
   m_Name: BoxAttack
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,9 +183,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1762720546655681205}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PositionShooting
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57951979395369193}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -315,8 +315,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 95382847
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -365,7 +365,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8440768281535757242}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 72bbe98232a882a47a8c0a59125a7f8f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -391,7 +391,7 @@ BoxCollider2D:
   m_Offset: {x: -0.4726417, y: -0.26912868}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.38, y: 0.5}
     oldSize: {x: 4.3125, y: 2.75}
     newSize: {x: 4.3125, y: 2.75}
     adaptiveTilingThreshold: 0.5
@@ -438,6 +438,7 @@ MonoBehaviour:
   groundHp: {fileID: 0}
   imageHpFull: {fileID: -2029922670, guid: 889951e9407ea0a4f85b0a60c639cf6b, type: 3}
   imageHpEmpty: {fileID: 1925945752, guid: 889951e9407ea0a4f85b0a60c639cf6b, type: 3}
+  uiDie: {fileID: 0}
 --- !u!114 &3473788173721166665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,21 +453,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   jumpForce: 16
-  groundCheckRadius: 0.1
+  groundCheckRadius: 0.2
   dashTime: 0.42
   dashSpeed: 20
   dashCoolDown: 2
   damage: 20
   bulletCount: 100
   amountOfJumps: 2
+  diamondCount: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 384
+  whatIsWater:
+    serializedVersion: 2
+    m_Bits: 0
   groundCheck: {fileID: 57951979395369193}
   positionShooting: {fileID: 1762720546655681205}
   shooting: {fileID: 4597839580512626358, guid: 247b6449d0d5fff4fa01a92b8f7f2349, type: 3}
   boxAttack: {fileID: 3059513758426514946}
-  boxAttack1: {fileID: 238696778536467886}
   enemyContactFilter:
     useTriggers: 1
     useLayerMask: 1
@@ -482,5 +486,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   textBulletCount: {fileID: 0}
+  textDiamondCount: {fileID: 0}
+  textDiamondCountYouWin: {fileID: 0}
   TimeAttack: 0.9
   TimeShooting: 1

@@ -225,13 +225,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.8622026, y: 0.69496393}
-      - {x: 1.2225859, y: 0.82642937}
-      - {x: 0.9436947, y: 0.8447759}
-      - {x: 0.8357897, y: 0.500288}
-      - {x: 0.24263579, y: 0.24921599}
+    - - {x: 1.9307756, y: 0.81251764}
+      - {x: 1.4478972, y: 1.012557}
+      - {x: 1.0612484, y: 1.0015152}
+      - {x: 0.80640125, y: 0.7451935}
+      - {x: 0.23283964, y: 0.5039166}
       - {x: -1.2544026, y: 0.58573866}
       - {x: -0.8972044, y: 0.049048543}
+      - {x: -0.38720703, y: -0.13724232}
+      - {x: 0.23643494, y: -0.2658491}
       - {x: 1.082917, y: -0.273363}
       - {x: 1.569591, y: 0.03748606}
       - {x: 1.8390876, y: 0.48293263}
@@ -476,7 +478,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7318978344053040712}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -494,7 +496,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!95 &2275245718469501141
 Animator:
   serializedVersion: 5
@@ -592,7 +594,7 @@ MonoBehaviour:
   timer: 1
   hpEnemy: 100
   hp: {fileID: 4099716184873059982}
-  boxAttack: {fileID: 0}
+  boxAttack: {fileID: 2783718644806463899}
   leftLimit: {fileID: 250796379722441906}
   rightLimit: {fileID: 6373683813123771104}
   enemyContactFilter:
