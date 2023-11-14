@@ -5,49 +5,69 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int countHeal;
-    private int currentHealth;
-    public Transform groundHp;
-    public Sprite imageHpFull;
-    public Sprite imageHpEmpty;
-    public GameObject uiDie;
-    private Animator _animatorController;
+    public int countHeal; // Số lượng máu tối đa
+    private int currentHealth; // Mức máu hiện tại
+    public Transform groundHp; // Đối tượng chứa hình ảnh biểu tượng máu
+    public Sprite imageHpFull; // Hình ảnh biểu tượng máu đầy
+    public Sprite imageHpEmpty; // Hình ảnh biểu tượng máu rỗng
+    public GameObject uiDie; // Giao diện hiển thị khi nhân vật chết
+    private Animator _animatorController; // Điều khiển Animator của nhân vật
+
     private void Awake()
     {
-         uiDie.SetActive(false);
+        // Tắt giao diện chết khi khởi tạo
+        uiDie.SetActive(false);
+
+        // Lấy Animator của nhân vật
         _animatorController = GetComponent<Animator>();
+
+        // Đặt máu hiện tại bằng máu tối đa
         currentHealth = countHeal;
     }
 
-    // Hàm trừ HP
+    // Hàm trừ máu
     public void TakeDamage(int damageAmount)
     {
-        // Trừ HP
+        // Trừ lượng máu theo lượng damageAmount
         currentHealth -= damageAmount;
-        // Kiểm tra xem nhân vật còn HP không
+
+        // Kiểm tra nếu máu hiện tại ít hơn hoặc bằng 0
         if (currentHealth <= 0)
         {
+            // Gọi hàm Die khi nhân vật hết máu
             Die();
         }
         else
         {
+            // Chơi animation "hurt" khi nhân vật bị thương
             _animatorController.SetTrigger("hurt");
+
+            // Cập nhật hình ảnh biểu tượng máu theo máu hiện tại
             groundHp.GetChild(currentHealth).GetComponent<Image>().sprite = imageHpEmpty;
         }
     }
 
+    // Hàm cập nhật lượng máu khi nhận thêm máu
     public void UpdateHealth(int count)
     {
-        if (currentHealth <= countHeal)
+        // Kiểm tra xem máu hiện tại có bé hơn máu tối đa không
+        if (currentHealth < countHeal)
         {
+            // Cộng thêm lượng máu vào máu hiện tại
             currentHealth += count;
+
+            // Cập nhật hình ảnh biểu tượng máu theo máu hiện tại
             groundHp.GetChild(currentHealth).GetComponent<Image>().sprite = imageHpEmpty;
         }
     }
 
     // Hàm xử lý khi nhân vật chết
-    private void Die()
+    public void Die()
     {
+        // Dừng thời gian trong trò chơi
+        Time.timeScale = 0;
+
+        // Hiển thị giao diện chết
         uiDie.SetActive(true);
     }
 

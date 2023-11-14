@@ -596,8 +596,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2a187c6825f944ba8d53f7b98c5799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 2
+  attackDistance: 3
   timer: 2
   hpEnemy: 100
   hp: {fileID: 1262592274592311974}
   item: {fileID: 2844137278138722718, guid: 526d23e1a8164ff40906d2d531f76f9a, type: 3}
+  boxAttack: {fileID: 7835432231501788805}
+  enemyContactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0

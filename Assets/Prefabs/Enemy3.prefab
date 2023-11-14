@@ -48,7 +48,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100184513485109662}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -66,7 +66,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!95 &6373195889649052745
 Animator:
   serializedVersion: 5
@@ -164,8 +164,23 @@ MonoBehaviour:
   timer: 1
   hpEnemy: 100
   hp: {fileID: 2551927467160395801}
+  boxAttack: {fileID: 7761135839346516933}
   leftLimit: {fileID: 2143330696674673094}
   rightLimit: {fileID: 3593149382534638495}
+  enemyContactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!61 &1112588188327247694
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -692,14 +707,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.80631423, y: 1.7508523}
-      - {x: 0.3762517, y: 1.5262185}
-      - {x: 0.498623, y: 1.2171817}
-      - {x: 0.16041088, y: 0.63446593}
+    - - {x: 1.1494293, y: 1.6223564}
+      - {x: 0.86048293, y: 1.9288723}
+      - {x: 0.29885912, y: 1.7197186}
+      - {x: 0.2044946, y: 1.2094417}
+      - {x: 0.098490715, y: 0.60350585}
       - {x: 0.26601535, y: 0.31072798}
-      - {x: 0.6453355, y: 0.22982267}
-      - {x: 0.8424487, y: 0.41193855}
-      - {x: 0.9432614, y: 0.5356711}
-      - {x: 1.0869519, y: 0.7583531}
-      - {x: 1.0886574, y: 1.1652434}
+      - {x: 0.78464824, y: 0.2762628}
+      - {x: 0.94306517, y: 0.39645946}
+      - {x: 1.0361416, y: 0.54341114}
+      - {x: 1.1953045, y: 0.76609313}
+      - {x: 1.2047615, y: 1.211683}
   m_UseDelaunayMesh: 0
