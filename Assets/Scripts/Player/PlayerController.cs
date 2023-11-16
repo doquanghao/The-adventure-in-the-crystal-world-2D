@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>(); // Lấy tham chiếu đến PlayerHealth của nhân vật
         amountOfJumpsLeft = amountOfJumps; // Khởi tạo số lượng nhảy còn lại bằng số lượng nhảy tối đa
         textBulletCount.text = bulletCount.ToString(); // Hiển thị số lượng đạn trên giao diện
-        textDiamondCount.text = ""; // Hiển thị số lượng kim cương trên giao diện (đang để trống vì không có giá trị ban đầu)
+        textDiamondCount.text = "0"; // Hiển thị số lượng kim cương trên giao diện (đang để trống vì không có giá trị ban đầu)
     }
 
     private void Update()
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         timeSkillShooting += Time.deltaTime; // Cập nhật thời gian kể từ lần sử dụng kỹ năng bắn đạn gần nhất
         AppLyMovement(); // Gọi hàm áp dụng di chuyển của nhân vật
         CheckSurroundings(); // Gọi hàm kiểm tra môi trường xung quanh nhân vật
-        CheckWater(); 
+        CheckWater();
     }
 
     private void CheckSurroundings()
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         //Nếu trạm vào nước chết.
         if (isCheckWater)
         {
-           playerHealth.Die();
+            playerHealth.Die();
         }
     }
     // Thu thập thông tin đầu vào từ người chơi
@@ -183,10 +183,10 @@ public class PlayerController : MonoBehaviour
             if (c.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 // Nếu là đối tượng Enemy_behaviour
-                if (c.gameObject.GetComponent<Enemy_behaviour>() != null)
+                if (c.gameObject.GetComponent<Enemy_behaviour_01>() != null)
                 {
                     // Gọi hàm cập nhật HP của Enemy_behaviour
-                    c.gameObject.GetComponent<Enemy_behaviour>().UpdateHpEnemy(damage, gameObject);
+                    c.gameObject.GetComponent<Enemy_behaviour_01>().UpdateHpEnemy(damage);
                 }
                 // Nếu là đối tượng Enemy_behaviour_idle
                 else if (c.gameObject.GetComponent<Enemy_behaviour_idle>() != null)
@@ -231,6 +231,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Khi Dash kết thúc, người chơi có thể di chuyển lại
                 canMove = true;
+                isDashing = false;
             }
         }
     }
@@ -240,7 +241,7 @@ public class PlayerController : MonoBehaviour
     private void UpdateAmintions()
     {
         // Cập nhật trạng thái chạy, đang đứng trên mặt đất, và vận tốc theo trục y cho Animator
-        _animatorController.SetBool("Run", rb.velocity.x != 0);
+        _animatorController.SetBool("Run", move.x != 0);
         _animatorController.SetBool("isGrounded", isCheckGround);
         _animatorController.SetFloat("yVelocity", rb.velocity.y);
         // Đặt trạng thái Dash trong Animator dựa trên khả năng di chuyển
@@ -279,6 +280,7 @@ public class PlayerController : MonoBehaviour
     // Hàm áp dụng vận tốc di chuyển cho nhân vật
     public void AppLyMovement()
     {
+        Debug.Log($"canMove" + canMove);
         // Nếu có khả năng di chuyển, đặt vận tốc di chuyển theo hướng người chơi nhập vào
         if (canMove)
         {
