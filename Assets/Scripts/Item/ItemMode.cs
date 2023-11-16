@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,17 @@ public class ItemMode : MonoBehaviour
     // Animator của vật phẩm
     public Animator animatorItem;
 
+
+    private void Awake()
+    {
+        // Tạo một số ngẫu nhiên để chọn TypeItem mới
+        System.Random random = new System.Random();
+        TypeItem randomTypeItem = (TypeItem)random.Next(1, Enum.GetValues(typeof(TypeItem)).Length + 1);
+
+        // Gán giá trị TypeItem mới cho itemMode và khởi tạo item
+        typeItem = randomTypeItem;
+        InitItem();
+    }
     // Hàm khởi tạo vật phẩm
     public void InitItem()
     {
@@ -27,7 +39,7 @@ public class ItemMode : MonoBehaviour
     void OnTriggerEnter2D(Collider2D trig)
     {
         // Kiểm tra xem vật phẩm va chạm với đối tượng có tag "Player" không
-        if (trig.gameObject.CompareTag("Player"))
+        if (trig.gameObject.CompareTag("Player") && trig != null)
         {
             // Sử dụng cấp độ vật phẩm để thực hiện hành động tương ứng
             switch (typeItem)

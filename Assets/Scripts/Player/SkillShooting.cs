@@ -69,9 +69,9 @@ public class SkillShooting : MonoBehaviour
             transform.position = collision.gameObject.transform.position;
 
             // Kiểm tra loại đối tượng Enemy và cập nhật HP tương ứng
-            if (collision.gameObject.GetComponent<Enemy_behaviour>() != null)
+            if (collision.gameObject.GetComponent<Enemy_behaviour_01>() != null)
             {
-                collision.gameObject.GetComponent<Enemy_behaviour>().UpdateHpEnemy(damage, gameObject);
+                collision.gameObject.GetComponent<Enemy_behaviour_01>().UpdateHpEnemy(damage);
             }
             else if (collision.gameObject.GetComponent<Enemy_behaviour_idle>() != null)
             {

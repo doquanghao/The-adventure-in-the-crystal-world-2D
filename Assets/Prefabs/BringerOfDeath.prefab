@@ -318,8 +318,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -311825815
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -750047184722822154, guid: 1914d95466e3d4341a618c35a56d5f82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -345,15 +345,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  rayCast: {fileID: 0}
   moveSpeed: 4
   positionOffSetSkill: {x: 0.5, y: 0.5}
   timer: 1
   hpEnemy: 100
   hp: {fileID: 0}
+  bossUI: {fileID: 0}
   boxAttack: {fileID: 2206735102331729854}
   attackRange: {fileID: 1425029157566360896}
   player: {fileID: 0}
+  victoryScreen: {fileID: 0}
   enemyContactFilter:
     useTriggers: 0
     useLayerMask: 0

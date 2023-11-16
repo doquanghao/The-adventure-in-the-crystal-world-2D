@@ -55,9 +55,8 @@ public class PlayerHealth : MonoBehaviour
         {
             // Cộng thêm lượng máu vào máu hiện tại
             currentHealth += count;
-
             // Cập nhật hình ảnh biểu tượng máu theo máu hiện tại
-            groundHp.GetChild(currentHealth).GetComponent<Image>().sprite = imageHpEmpty;
+            groundHp.GetChild(currentHealth-1).GetComponent<Image>().sprite = imageHpFull;
         }
     }
 
