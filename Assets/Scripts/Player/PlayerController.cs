@@ -63,30 +63,23 @@ public class PlayerController : MonoBehaviour
         _animatorController = GetComponent<Animator>(); // Lấy tham chiếu đến Animator của nhân vật
         playerHealth = GetComponent<PlayerHealth>(); // Lấy tham chiếu đến PlayerHealth của nhân vật
 
-        if (GameManager.instance.diamondCount == 0)
+        // Kiểm tra xem GameManager có tồn tại không
+        if (GameManager.instance != null)
         {
-            textDiamondCount.text =
-                "0";
-        }
-        else
-        {
-            textDiamondCount.text =
-                GameManager.instance.diamondCount.ToString();
+            // Hiển thị số lượng kim cương và đạn trên giao diện từ dữ liệu của GameManager
+            textDiamondCount.text = GameManager.instance.diamondCount.ToString();
             diamondCount = GameManager.instance.diamondCount;
-        }
-
-        if (GameManager.instance.bulletCount == 0)
-        {
-            textBulletCount.text = bulletCount.ToString(); // Hiển thị số lượng đạn trên giao diện
+            textBulletCount.text = GameManager.instance.bulletCount.ToString();
+            bulletCount = GameManager.instance.bulletCount;
         }
         else
         {
-            textBulletCount.text = GameManager.instance.bulletCount.ToString(); // Hiển thị số lượng đạn trên giao diện
-            bulletCount = GameManager.instance.bulletCount;
+            // Nếu không có GameManager, hiển thị số đạn mặc định và số kim cương là 0
+            textBulletCount.text = bulletCount.ToString();
+            textDiamondCount.text = "0";
         }
 
         amountOfJumpsLeft = amountOfJumps; // Khởi tạo số lượng nhảy còn lại bằng số lượng nhảy tối đa
-        // Hiển thị số lượng kim cương trên giao diện (đang để trống vì không có giá trị ban đầu)
     }
 
     private void Update()
@@ -129,7 +122,7 @@ public class PlayerController : MonoBehaviour
     private void GatherInput()
     {
         // Lấy vector di chuyển từ trục ngang và dọc
-        move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        move = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
 
         // Nếu người chơi nhấn nút nhảy
         if (Input.GetButtonDown("Jump"))
@@ -145,14 +138,14 @@ public class PlayerController : MonoBehaviour
                 AttemptToDash();
         }
 
-        // Nếu người chơi nhấn chuột phải để dùng kĩ năng
-        if (Input.GetMouseButtonDown(1))
+        // Nếu người chơi nhấn W tấn công bằng kỹ năng
+        if (Input.GetKeyDown(KeyCode.W))
         {
             AttackShooting();
         }
 
-        // Nếu người chơi nhấn chuột trái tấn công
-        if (Input.GetMouseButtonDown(0))
+        // Nếu người chơi nhấn Q tấn công
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             Attack();
         }
@@ -343,7 +336,7 @@ public class PlayerController : MonoBehaviour
         // Cập nhật văn bản trên giao diện
         textDiamondCount.text = diamondCount.ToString();
         GameManager.instance.diamondCount = diamondCount;
-        textDiamondCountYouWin.text = "Số kim cương: " + diamondCount;
+        textDiamondCountYouWin.text = "Số kim cương: " + GameManager.instance.diamondCount;
     }
 
     // Hàm cập nhật số lượng viên đạn và hiển thị trên giao diện
@@ -353,7 +346,7 @@ public class PlayerController : MonoBehaviour
         bulletCount += count;
         // Cập nhật văn bản trên giao diện
         textBulletCount.text = bulletCount.ToString();
-        
+
         GameManager.instance.bulletCount = bulletCount;
     }
 

@@ -165,6 +165,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 238696778536467886, guid: f24ff13f4d91af3449ac0a144ed81b59, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 775825594532001824, guid: f24ff13f4d91af3449ac0a144ed81b59, type: 3}
       propertyPath: uiDie
       value: 
@@ -173,6 +177,10 @@ PrefabInstance:
       propertyPath: groundHp
       value: 
       objectReference: {fileID: 924877139}
+    - target: {fileID: 3059513758426514946, guid: f24ff13f4d91af3449ac0a144ed81b59, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3473788173721166665, guid: f24ff13f4d91af3449ac0a144ed81b59, type: 3}
       propertyPath: damage
       value: 30
@@ -28917,6 +28925,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 790080850}
+  - {fileID: 874439434}
   - {fileID: 607236970}
   - {fileID: 377320162}
   - {fileID: 34041529}
@@ -28928,4 +28937,3 @@ SceneRoots:
   - {fileID: 366313297}
   - {fileID: 490210963}
   - {fileID: 1981404935}
-  - {fileID: 874439434}

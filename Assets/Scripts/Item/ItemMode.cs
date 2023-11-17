@@ -61,10 +61,10 @@ public class ItemMode : MonoBehaviour
                     trig.GetComponent<PlayerHealth>().UpdateHealth(1);
                     break;
             }
+            audioSource.Play();
 
             // Hủy đối tượng vật phẩm sau khi xử lý
             Destroy(gameObject);
-            audioSource.Play();
         }
     }
 

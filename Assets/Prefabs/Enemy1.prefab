@@ -307,7 +307,7 @@ MonoBehaviour:
   rayCastLength: 6.5
   attackDistance: 1.5
   moveSpeed: 2
-  timer: 2
+  timer: 1
   hpEnemy: 100
   hp: {fileID: 5718533054755968993}
   boxAttack: {fileID: 5048069906699353464}
