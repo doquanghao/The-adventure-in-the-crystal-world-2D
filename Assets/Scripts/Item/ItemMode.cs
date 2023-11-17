@@ -16,14 +16,14 @@ public class ItemMode : MonoBehaviour
 
     // Animator của vật phẩm
     public Animator animatorItem;
-
+    private AudioSource audioSource;
 
     private void Awake()
     {
+        audioSource=GetComponent<AudioSource>();
         // Tạo một số ngẫu nhiên để chọn TypeItem mới
         System.Random random = new System.Random();
         TypeItem randomTypeItem = (TypeItem)random.Next(1, Enum.GetValues(typeof(TypeItem)).Length + 1);
-
         // Gán giá trị TypeItem mới cho itemMode và khởi tạo item
         typeItem = randomTypeItem;
         InitItem();
@@ -64,6 +64,7 @@ public class ItemMode : MonoBehaviour
 
             // Hủy đối tượng vật phẩm sau khi xử lý
             Destroy(gameObject);
+            audioSource.Play();
         }
     }
 

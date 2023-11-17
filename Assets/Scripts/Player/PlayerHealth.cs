@@ -22,7 +22,14 @@ public class PlayerHealth : MonoBehaviour
         _animatorController = GetComponent<Animator>();
 
         // Đặt máu hiện tại bằng máu tối đa
-        currentHealth = countHeal;
+        if (GameManager.instance.currentHealth == 0)
+        {
+            currentHealth = countHeal;
+        }
+        else
+        {
+            currentHealth = GameManager.instance.currentHealth;
+        }
     }
 
     // Hàm trừ máu
@@ -30,12 +37,12 @@ public class PlayerHealth : MonoBehaviour
     {
         // Trừ lượng máu theo lượng damageAmount
         currentHealth -= damageAmount;
-
+        GameManager.instance.currentHealth=currentHealth;
         // Kiểm tra nếu máu hiện tại ít hơn hoặc bằng 0
         if (currentHealth <= 0)
         {
             // Gọi hàm Die khi nhân vật hết máu
-            Die();
+            _animatorController.SetTrigger("death");
         }
         else
         {
@@ -56,7 +63,8 @@ public class PlayerHealth : MonoBehaviour
             // Cộng thêm lượng máu vào máu hiện tại
             currentHealth += count;
             // Cập nhật hình ảnh biểu tượng máu theo máu hiện tại
-            groundHp.GetChild(currentHealth-1).GetComponent<Image>().sprite = imageHpFull;
+            groundHp.GetChild(currentHealth - 1).GetComponent<Image>().sprite = imageHpFull;
+            GameManager.instance.currentHealth=currentHealth;
         }
     }
 
@@ -69,5 +77,4 @@ public class PlayerHealth : MonoBehaviour
         // Hiển thị giao diện chết
         uiDie.SetActive(true);
     }
-
 }
