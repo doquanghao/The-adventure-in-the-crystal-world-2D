@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Transform positionShooting; // Vị trí bắn đạn
     public GameObject shooting; // Đối tượng đạn
     public GameObject boxAttack; // Hộp tấn công
+    public AudioClip audioClipAttack; // Âm thanh tấn công
     public ContactFilter2D enemyContactFilter; // Bộ lọc va chạm với kẻ địch
 
     public TMP_Text textBulletCount; // Text hiển thị số lượng đạn
@@ -53,15 +54,39 @@ public class PlayerController : MonoBehaviour
 
     private int amountOfJumpsLeft; // Số lượng nhảy còn lại
 
+    private AudioSource audioSourcePlayer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Lấy tham chiếu đến Rigidbody2D của nhân vật
+        audioSourcePlayer = GetComponent<AudioSource>(); // Lấy tham chiếu đến AudioSource của nhân vật
         _animatorController = GetComponent<Animator>(); // Lấy tham chiếu đến Animator của nhân vật
         playerHealth = GetComponent<PlayerHealth>(); // Lấy tham chiếu đến PlayerHealth của nhân vật
+
+        if (GameManager.instance.diamondCount == 0)
+        {
+            textDiamondCount.text =
+                "0";
+        }
+        else
+        {
+            textDiamondCount.text =
+                GameManager.instance.diamondCount.ToString();
+            diamondCount = GameManager.instance.diamondCount;
+        }
+
+        if (GameManager.instance.bulletCount == 0)
+        {
+            textBulletCount.text = bulletCount.ToString(); // Hiển thị số lượng đạn trên giao diện
+        }
+        else
+        {
+            textBulletCount.text = GameManager.instance.bulletCount.ToString(); // Hiển thị số lượng đạn trên giao diện
+            bulletCount = GameManager.instance.bulletCount;
+        }
+
         amountOfJumpsLeft = amountOfJumps; // Khởi tạo số lượng nhảy còn lại bằng số lượng nhảy tối đa
-        textBulletCount.text = bulletCount.ToString(); // Hiển thị số lượng đạn trên giao diện
-        textDiamondCount.text = "0"; // Hiển thị số lượng kim cương trên giao diện (đang để trống vì không có giá trị ban đầu)
+        // Hiển thị số lượng kim cương trên giao diện (đang để trống vì không có giá trị ban đầu)
     }
 
     private void Update()
@@ -87,6 +112,7 @@ public class PlayerController : MonoBehaviour
         // Kiểm tra xem nhân vật có đang đứng trên mặt đất hay không
         isCheckGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
+
     private void CheckWater()
     {
         // Kiểm tra xem nhân vật có chạm vào nước hay không
@@ -98,6 +124,7 @@ public class PlayerController : MonoBehaviour
             playerHealth.Die();
         }
     }
+
     // Thu thập thông tin đầu vào từ người chơi
     private void GatherInput()
     {
@@ -166,6 +193,7 @@ public class PlayerController : MonoBehaviour
         {
             // Gọi một trong ba hoạt cảnh tấn công "Attack"
             _animatorController.SetTrigger("Attack");
+            audioSourcePlayer.PlayOneShot(audioClipAttack);
             // Đặt lại thời gian kể từ lần tấn công gần nhất
             timeSinceAttack = 0.0f;
         }
@@ -267,6 +295,7 @@ public class PlayerController : MonoBehaviour
             canJump = true;
         }
     }
+
     // Hàm thực hiện khi nhân vật nhảy
     private void Jump()
     {
@@ -277,10 +306,10 @@ public class PlayerController : MonoBehaviour
             amountOfJumpsLeft--;
         }
     }
+
     // Hàm áp dụng vận tốc di chuyển cho nhân vật
     public void AppLyMovement()
     {
-        Debug.Log($"canMove" + canMove);
         // Nếu có khả năng di chuyển, đặt vận tốc di chuyển theo hướng người chơi nhập vào
         if (canMove)
         {
@@ -305,6 +334,7 @@ public class PlayerController : MonoBehaviour
             facingDirection = -1;
         }
     }
+
     // Hàm cập nhật số lượng kim cương và hiển thị trên giao diện
     public void UpdateTextDiamondCount(int count)
     {
@@ -312,7 +342,8 @@ public class PlayerController : MonoBehaviour
         diamondCount += count;
         // Cập nhật văn bản trên giao diện
         textDiamondCount.text = diamondCount.ToString();
-        textDiamondCountYouWin.text = "Số kim cương: " + diamondCount.ToString();
+        GameManager.instance.diamondCount = diamondCount;
+        textDiamondCountYouWin.text = "Số kim cương: " + diamondCount;
     }
 
     // Hàm cập nhật số lượng viên đạn và hiển thị trên giao diện
@@ -322,6 +353,8 @@ public class PlayerController : MonoBehaviour
         bulletCount += count;
         // Cập nhật văn bản trên giao diện
         textBulletCount.text = bulletCount.ToString();
+        
+        GameManager.instance.bulletCount = bulletCount;
     }
 
     // Hàm đảo hướng nhân vật
@@ -337,5 +370,4 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawSphere(groundCheck.position, groundCheckRadius);
     }
-
 }
