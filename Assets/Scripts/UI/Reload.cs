@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIDie : MonoBehaviour
+public class Reload : MonoBehaviour
 {
    public void OnReload()
    {

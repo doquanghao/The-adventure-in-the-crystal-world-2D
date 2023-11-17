@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 648641502730767355}
   - component: {fileID: 5402843908684375101}
   - component: {fileID: 6379663469702782694}
-  - component: {fileID: 7981210638664714019}
+  - component: {fileID: 159799126965975364}
   m_Layer: 0
   m_Name: diamond_big
   m_TagString: Untagged
@@ -153,7 +153,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.875}
   m_EdgeRadius: 0
---- !u!114 &7981210638664714019
+--- !u!114 &159799126965975364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,8 +162,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7666284011161630761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e978abb3203b0141b3fb9c1a0a87e6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e709f408a74f0f4cbc75927c1fcbf04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeItem: 2
-  animatorItem: {fileID: 5402843908684375101}

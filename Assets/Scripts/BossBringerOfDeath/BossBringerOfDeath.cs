@@ -30,7 +30,7 @@ public class BossBringerOfDeath : MonoBehaviour
 
     void Awake()
     {
-        victoryScreen.SetActive(false); // Ẩn màn hình chiến thắng khi bắt đầu
+        victoryScreen.SetActive(false);
         intTimer = timer; // Lưu giá trị ban đầu của timer
         anim = GetComponent<Animator>(); // Lấy thành phần Animator của đối tượng
         hpEnemyLeft = hpEnemy; // Gán giá trị máu còn lại bằng giá trị máu ban đầu
@@ -88,37 +88,32 @@ public class BossBringerOfDeath : MonoBehaviour
         // Nếu máu của Enemy dưới hoặc bằng 0
         if (hpEnemyLeft <= 0)
         {
-            // Tạo một bản sao của đối tượng item
-            var itemClone = Instantiate(item);
-
-            // Đặt vị trí của itemClone
-            itemClone.transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
-
-            // Lấy thành phần ItemMode từ itemClone
-            var itemMode = itemClone.GetComponent<ItemMode>();
-
-            // Khởi tạo item
-            itemMode.InitItem();
-
-            // Hiển thị màn hình chiến thắng
-            victoryScreen.SetActive(true);
-
-            // Hủy bỏ UI của Boss
-            Destroy(bossUI);
-
-            // Hủy bỏ đối tượng Enemy
-            Destroy(transform.gameObject);
+            // Triggers animation "death" để phản cái chết
+            anim.SetTrigger("death");
         }
         else
         {
-            // Triggers animation "damage" để phản ánh sự tổn thương
-            anim.SetTrigger("damage");
-
             // Cập nhật giá trị thanh máu dựa trên máu còn lại so với máu ban đầu
             hp.value = (float)hpEnemyLeft / hpEnemy;
         }
     }
+    public void OnDeath()
+    {
+        // Tạo một bản sao của đối tượng item
+        var itemClone = Instantiate(item);
 
+        // Đặt vị trí của itemClone
+        itemClone.transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+
+        // Lấy thành phần ItemMode từ itemClone
+        var itemMode = itemClone.GetComponent<ItemBoss>();
+        itemMode.victoryScreen = victoryScreen;
+        // Hủy bỏ UI của Boss
+        Destroy(bossUI);
+
+        // Hủy bỏ đối tượng Enemy
+        Destroy(transform.gameObject);
+    }
 
     void OnTriggerEnter2D(Collider2D trig)
     {

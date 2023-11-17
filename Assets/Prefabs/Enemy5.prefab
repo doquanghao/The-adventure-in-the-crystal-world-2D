@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDistance: 3
-  timer: 2
+  timer: 1
   hpEnemy: 100
   hp: {fileID: 1262592274592311974}
   item: {fileID: 2844137278138722718, guid: 526d23e1a8164ff40906d2d531f76f9a, type: 3}
